@@ -40,7 +40,7 @@ public class RegisterActivity extends AppCompatActivity {
     private String email;
     private String roll;
     private ProgressDialog pDialog;
-    public String register_url = "http://192.168.0.106/vorti_php/member/register.php";
+    public String register_url = "http://127.0.0.1:8080/vorti_php/member/register.php";
     private SessionHandler session;
 
     @Override
@@ -133,15 +133,15 @@ public class RegisterActivity extends AppCompatActivity {
                             //Check if user got registered successfully
                             if (response.getInt(KEY_STATUS) == 0) {
                                 //Set the user session
-                                session.loginUser(phone,fullName);
+                                session.loginUser(phone, fullName);
                                 loadProfile();
 
-                            }else if(response.getInt(KEY_STATUS) == 1){
+                            } else if (response.getInt(KEY_STATUS) == 1) {
                                 //Display error message if number is already existsing
                                 etPhone.setError("Phone number already taken!");
                                 etPhone.requestFocus();
 
-                            }else{
+                            } else {
                                 Toast.makeText(getApplicationContext(),
                                         response.getString(KEY_MESSAGE), Toast.LENGTH_SHORT).show();
 
@@ -169,6 +169,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     /**
      * Validates inputs and shows error if any
+     *
      * @return
      */
     private boolean validateInputs() {

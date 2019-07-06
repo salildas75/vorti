@@ -18,7 +18,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 
-public class LoginActivity extends AppCompatActivity{
+public class LoginActivity extends AppCompatActivity {
 
     private static final String KEY_STATUS = "status";
     private static final String KEY_MESSAGE = "message";
@@ -31,7 +31,7 @@ public class LoginActivity extends AppCompatActivity{
     private String phone;
     private String password;
     private ProgressDialog pDialog;
-    public String login_url = "http://192.168.0.106/vorti_php/member/login.php";
+    public String login_url = "http://127.0.0.1:8080/vorti_php/member/login.php";
     private SessionHandler session;
 
     @Override
@@ -39,7 +39,7 @@ public class LoginActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         session = new SessionHandler(getApplicationContext());
 
-        if(session.isLoggedIn()){
+        if (session.isLoggedIn()) {
             loadProfile();
         }
         setContentView(R.layout.activity_login);
@@ -117,10 +117,10 @@ public class LoginActivity extends AppCompatActivity{
                             //Check if user got logged in successfully
 
                             if (response.getInt(KEY_STATUS) == 0) {
-                                session.loginUser(phone,response.getString(KEY_FULL_NAME));
+                                session.loginUser(phone, response.getString(KEY_FULL_NAME));
                                 loadProfile();
 
-                            }else{
+                            } else {
                                 Toast.makeText(getApplicationContext(),
                                         response.getString(KEY_MESSAGE), Toast.LENGTH_SHORT).show();
 
@@ -148,15 +148,16 @@ public class LoginActivity extends AppCompatActivity{
 
     /**
      * Validates inputs and shows error if any
+     *
      * @return
      */
     private boolean validateInputs() {
-        if(KEY_EMPTY.equals(phone)){
+        if (KEY_EMPTY.equals(phone)) {
             etPhone.setError("Phone cannot be empty");
             etPhone.requestFocus();
             return false;
         }
-        if(KEY_EMPTY.equals(password)){
+        if (KEY_EMPTY.equals(password)) {
             etPassword.setError("Password cannot be empty");
             etPassword.requestFocus();
             return false;

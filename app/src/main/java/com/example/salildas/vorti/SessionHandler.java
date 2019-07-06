@@ -65,7 +65,7 @@ public class SessionHandler {
         return user;
     }
 
-    public void logoutUser(){
+    public void logoutUser() {
         mEditor.clear();
         mEditor.commit();
     }
