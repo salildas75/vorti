@@ -40,7 +40,7 @@ public class RegisterActivity extends AppCompatActivity {
     private String email;
     private String roll;
     private ProgressDialog pDialog;
-    public String register_url = "http://127.0.0.1:8080/vorti_php/member/register.php";
+    public String register_url = "http://192.168.0.111/vorti_php/member/register.php";
     private SessionHandler session;
 
     @Override

@@ -31,7 +31,7 @@ public class LoginActivity extends AppCompatActivity {
     private String phone;
     private String password;
     private ProgressDialog pDialog;
-    public String login_url = "http://127.0.0.1:8080/vorti_php/member/login.php";
+    public String login_url = "http://192.168.0.111/vorti_php/member/login.php";
     private SessionHandler session;
 
     @Override
