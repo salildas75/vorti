@@ -133,7 +133,7 @@ public class RegisterActivity extends AppCompatActivity {
                             //Check if user got registered successfully
                             if (response.getInt(KEY_STATUS) == 0) {
                                 //Set the user session
-                                session.loginUser(phone, fullName);
+                                session.loginUser(phone, fullName, email, roll);
                                 loadProfile();
 
                             } else if (response.getInt(KEY_STATUS) == 1) {

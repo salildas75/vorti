@@ -16,9 +16,15 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
         session = new SessionHandler(getApplicationContext());
         User user = session.getUserDetails();
-        TextView welcomeText = findViewById(R.id.welcomeText);
+        TextView fullName = findViewById(R.id.fullName);
+        TextView phone = findViewById(R.id.phone);
+        TextView email = findViewById(R.id.email);
+        TextView roll = findViewById(R.id.roll);
 
-        welcomeText.setText("Welcome " + user.getFullName() + ", your session will expire on " + user.getSessionExpiryDate());
+        fullName.setText(user.getFullName());
+        phone.setText(user.getPhone());
+        email.setText(user.getEmail());
+        roll.setText(user.getRoll());
 
         Button logoutBtn = findViewById(R.id.btnLogout);
 
