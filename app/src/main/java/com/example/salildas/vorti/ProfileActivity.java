@@ -14,8 +14,11 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+
         session = new SessionHandler(getApplicationContext());
         User user = session.getUserDetails();
+
         TextView fullName = findViewById(R.id.fullName);
         TextView phone = findViewById(R.id.phone);
         TextView email = findViewById(R.id.email);

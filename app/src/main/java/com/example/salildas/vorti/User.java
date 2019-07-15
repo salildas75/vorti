@@ -10,6 +10,8 @@ public class User {
     private String roll;
     private Date sessionExpiryDate;
 
+    public User(){}
+
     public String getPhone() {
         return phone;
     }
