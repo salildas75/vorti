@@ -7,6 +7,7 @@ public class Property {
     private String streetName;
     private String city;
     private String state;
+    private int contact;
     private Double rating;
     private String image;
     private Double price;
@@ -47,6 +48,14 @@ public class Property {
 
     public void setState(String state) {
         this.state = state;
+    }
+
+    public int getContact() {
+        return contact;
+    }
+
+    public void setContact(int contact) {
+        this.contact = contact;
     }
 
     public Double getRating() {

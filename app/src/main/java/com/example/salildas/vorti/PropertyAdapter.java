@@ -58,6 +58,7 @@ public class PropertyAdapter extends BaseAdapter {
 
             holder.ivImage = (ImageView) convertView.findViewById(R.id.image);
             holder.tvAddress = (TextView) convertView.findViewById(R.id.address);
+            holder.tvContact = (TextView) convertView.findViewById(R.id.contactNumber);
             holder.tvRating = (TextView) convertView.findViewById(R.id.rating);
             holder.tvPrice = (TextView) convertView.findViewById(R.id.price);
             holder.tvSeat = (TextView) convertView.findViewById(R.id.seat);
@@ -71,7 +72,8 @@ public class PropertyAdapter extends BaseAdapter {
         }
 
         Picasso.get().load(propertyArrayList.get(position).getImage()).into(holder.ivImage);
-        holder.tvAddress.setText("Address: "+propertyArrayList.get(position).getStreetNumber()+propertyArrayList.get(position).getStreetName()+propertyArrayList.get(position).getCity());
+        holder.tvAddress.setText("Address: "+propertyArrayList.get(position).getStreetNumber()+", "+propertyArrayList.get(position).getStreetName()+", "+propertyArrayList.get(position).getCity()+", "+propertyArrayList.get(position).getState());
+        holder.tvContact.setText("Contact: "+propertyArrayList.get(position).getContact());
         holder.tvRating.setText("Rating: "+propertyArrayList.get(position).getRating());
         holder.tvPrice.setText("Price: "+propertyArrayList.get(position).getPrice());
         holder.tvSeat.setText("Seat: "+propertyArrayList.get(position).getSeats());
@@ -83,7 +85,7 @@ public class PropertyAdapter extends BaseAdapter {
 
     private class ViewHolder {
 
-        protected TextView tvAddress, tvRating, tvPrice, tvSeat, tvBathroom, tvDistance;
+        protected TextView tvAddress, tvContact, tvRating, tvPrice, tvSeat, tvBathroom, tvDistance;
         protected ImageView ivImage;
     }
 

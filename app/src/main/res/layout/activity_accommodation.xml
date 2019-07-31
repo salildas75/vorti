@@ -8,7 +8,7 @@
     tools:context=".AccommodationActivity">
 
     <ListView
-        android:id="@+id/customListView"
+        android:id="@+id/accommodationListView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"></ListView>
 

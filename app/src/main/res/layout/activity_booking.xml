@@ -8,6 +8,27 @@
     android:gravity="center"
     tools:context=".BookingActivity">
 
+    <EditText
+        android:id="@+id/etSearchCity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@android:color/white"
+        android:hint="city"
+        android:inputType="text"
+        android:padding="10dp" />
+
+
+    <EditText
+        android:id="@+id/etSearchSeat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@android:color/white"
+        android:hint="Seat"
+        android:inputType="text"
+        android:padding="10dp" />
+
     <Button
         android:onClick="BookingSearch"
         android:layout_width="wrap_content"
@@ -16,5 +37,10 @@
         android:background="#f05924"
         android:text="Search"
         android:textColor="@android:color/white" />
+
+    <ListView
+        android:id="@+id/accommodationListView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></ListView>
 
 </LinearLayout>

@@ -18,11 +18,13 @@ import java.util.HashMap;
 
 public class AccommodationActivity extends AppCompatActivity {
 
-    private String jsonURL = "http://192.168.0.111/vorti_php/member/accommodation.php";
+    private String accommodationURL = "http://192.168.0.111/vorti_php/member/accommodation.php";
     private final int jsoncode = 1;
     private ListView listView;
     ArrayList<Property> propertyArrayList;
     private PropertyAdapter propertyAdapter;
+    private String city;
+    private String seat;
 
     private static ProgressDialog mProgressDialog;
 
@@ -31,7 +33,7 @@ public class AccommodationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_accommodation);
 
-        listView = findViewById(R.id.customListView);
+        listView = findViewById(R.id.accommodationListView);
 
         fetchJSON();
 
@@ -42,12 +44,15 @@ public class AccommodationActivity extends AppCompatActivity {
 
         showSimpleProgressDialog(this, "Loading...","Fetching Json",false);
 
+        city = getIntent().getStringExtra("SEARCH_CITY");
+        seat = getIntent().getStringExtra("SEARCH_SEAT");
+
         new AsyncTask<Void, Void, String>(){
             protected String doInBackground(Void[] params) {
                 String response="";
                 HashMap<String, String> map=new HashMap<>();
                 try {
-                    HttpRequest req = new HttpRequest(jsonURL);
+                    HttpRequest req = new HttpRequest(accommodationURL+"?city="+city+"&seat="+seat);
                     response = req.prepare(HttpRequest.Method.POST).withData(map).sendAndReadString();
                 } catch (Exception e) {
                     response=e.getMessage();
@@ -95,6 +100,7 @@ public class AccommodationActivity extends AppCompatActivity {
                     property.setStreetName(dataobj.getString("streetName"));
                     property.setCity(dataobj.getString("city"));
                     property.setState(dataobj.getString("state"));
+                    property.setContact(dataobj.getInt("user_contact"));
                     property.setRating(dataobj.getDouble("rating"));
                     property.setImage(dataobj.getString("image"));
                     property.setPrice(dataobj.getDouble("price"));
@@ -136,7 +142,7 @@ public class AccommodationActivity extends AppCompatActivity {
         startActivity(i);
         finish();
 
-        return "No data";
+        return "Not Found";
     }
 
     public static void removeSimpleProgressDialog() {

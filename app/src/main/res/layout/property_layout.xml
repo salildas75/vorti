@@ -35,13 +35,20 @@
             android:layout_marginBottom="10dp"
             android:text="Rating"
             android:textSize="15sp" />
+        <TextView
+            android:id="@+id/contactNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="Contact Number"
+            android:textSize="15sp" />
     </LinearLayout>
 
     <RelativeLayout
         android:id="@+id/pricingSection"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/infoSection"
+        android:layout_below="@+id/image"
         android:orientation="vertical">
 
         <TextView
