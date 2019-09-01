@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -26,6 +28,7 @@ public class RegisterActivity extends AppCompatActivity {
     private static final String KEY_PASSWORD = "password";
     private static final String KEY_EMAIL = "email";
     private static final String KEY_ROLL = "roll";
+    private static final String KEY_ROLE = "role";
     private static final String KEY_EMPTY = "";
     private EditText etFullName;
     private EditText etPhone;
@@ -33,14 +36,17 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText etConfirmPassword;
     private EditText etEmail;
     private EditText etRoll;
+    private RadioGroup radioRoleGroup;
+    private RadioButton radioRoleButton;
     private String fullName;
     private String phone;
     private String password;
     private String confirmPassword;
     private String email;
     private String roll;
+    private String role;
     private ProgressDialog pDialog;
-    public String register_url = "http://192.168.0.111/vorti_php/member/register.php";
+    public String register_url = "http://192.168.0.107/vorti_php/member/register.php";
     private SessionHandler session;
 
     @Override
@@ -54,6 +60,7 @@ public class RegisterActivity extends AppCompatActivity {
         etConfirmPassword = findViewById(R.id.etConfirmPassword);
         etEmail = findViewById(R.id.etEmail);
         etRoll = findViewById(R.id.etRoll);
+        radioRoleGroup = findViewById(R.id.radioRole);
 
 
         Button login = findViewById(R.id.btnRegisterLogin);
@@ -79,6 +86,11 @@ public class RegisterActivity extends AppCompatActivity {
                 confirmPassword = etConfirmPassword.getText().toString().trim();
                 email = etEmail.getText().toString().trim();
                 roll = etRoll.getText().toString().trim();
+
+                int selectedId = radioRoleGroup.getCheckedRadioButtonId();
+                radioRoleButton = (RadioButton) findViewById(selectedId);
+                role = radioRoleButton.getText().toString().trim();
+
                 if (validateInputs()) {
                     registerUser();
                 }
@@ -120,6 +132,7 @@ public class RegisterActivity extends AppCompatActivity {
             request.put(KEY_PASSWORD, password);
             request.put(KEY_EMAIL, email);
             request.put(KEY_ROLL, roll);
+            request.put(KEY_ROLE, role);
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -133,7 +146,7 @@ public class RegisterActivity extends AppCompatActivity {
                             //Check if user got registered successfully
                             if (response.getInt(KEY_STATUS) == 0) {
                                 //Set the user session
-                                session.loginUser(phone, fullName, email, roll);
+                                session.loginUser(phone, fullName, email, roll, role);
                                 loadProfile();
 
                             } else if (response.getInt(KEY_STATUS) == 1) {

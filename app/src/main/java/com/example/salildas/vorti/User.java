@@ -8,6 +8,7 @@ public class User {
     private String fullName;
     private String email;
     private String roll;
+    private String role;
     private Date sessionExpiryDate;
 
     public User(){}
@@ -42,6 +43,14 @@ public class User {
 
     public void setRoll(String roll) {
         this.roll = roll;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public Date getSessionExpiryDate() {

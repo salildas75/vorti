@@ -27,13 +27,14 @@ public class LoginActivity extends AppCompatActivity {
     private static final String KEY_PASSWORD = "password";
     private static final String KEY_EMAIL = "email";
     private static final String KEY_ROLL = "roll";
+    private static final String KEY_ROLE = "roll";
     private static final String KEY_EMPTY = "";
     private EditText etPhone;
     private EditText etPassword;
     private String phone;
     private String password;
     private ProgressDialog pDialog;
-    public String login_url = "http://192.168.0.111/vorti_php/member/login.php";
+    public String login_url = "http://192.168.0.107/vorti_php/member/login.php";
     private SessionHandler session;
 
     @Override
@@ -119,7 +120,7 @@ public class LoginActivity extends AppCompatActivity {
                             //Check if user got logged in successfully
 
                             if (response.getInt(KEY_STATUS) == 0) {
-                                session.loginUser(phone, response.getString(KEY_FULL_NAME), response.getString(KEY_EMAIL), response.getString(KEY_ROLL));
+                                session.loginUser(phone, response.getString(KEY_FULL_NAME), response.getString(KEY_EMAIL), response.getString(KEY_ROLL), response.getString(KEY_ROLE));
                                 loadProfile();
 
                             } else {
