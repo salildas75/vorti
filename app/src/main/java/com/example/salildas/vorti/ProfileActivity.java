@@ -23,11 +23,13 @@ public class ProfileActivity extends AppCompatActivity {
         TextView phone = findViewById(R.id.phone);
         TextView email = findViewById(R.id.email);
         TextView roll = findViewById(R.id.roll);
+        TextView role = findViewById(R.id.role);
 
         fullName.setText(user.getFullName());
         phone.setText(user.getPhone());
         email.setText(user.getEmail());
         roll.setText(user.getRoll());
+        role.setText(user.getRole());
 
         Button logoutBtn = findViewById(R.id.btnLogout);
 

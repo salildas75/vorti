@@ -31,7 +31,7 @@ public class BookingActivity extends AppCompatActivity {
     private String city;
     private String seat;
 //    For this List View
-    private String accommodationURL = "http://192.168.0.107/vorti_php/member/booking_all.php";
+    private String accommodationURL = "http://192.168.0.103/vorti_php/member/booking_all.php";
     private final int jsoncode = 1;
     private ListView listView;
     ArrayList<Property> propertyArrayList;

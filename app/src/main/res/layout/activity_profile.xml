@@ -17,6 +17,7 @@
             android:orientation="vertical">
 
             <ImageView
+                android:id="@+id/image"
                 android:layout_marginTop="25dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_width="150dp"
@@ -211,13 +212,14 @@
                 android:src="@drawable/logo" />
 
             <TextView
+                android:id="@+id/role"
                 android:textStyle="bold"
                 android:textColor="#fff"
                 android:layout_gravity="center_vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="20dp"
-                android:text="Show all comments" />
+                android:text="Role" />
         </LinearLayout>
     </LinearLayout>
 

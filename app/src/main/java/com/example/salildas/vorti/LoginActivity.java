@@ -27,14 +27,14 @@ public class LoginActivity extends AppCompatActivity {
     private static final String KEY_PASSWORD = "password";
     private static final String KEY_EMAIL = "email";
     private static final String KEY_ROLL = "roll";
-    private static final String KEY_ROLE = "roll";
+    private static final String KEY_ROLE = "role";
     private static final String KEY_EMPTY = "";
     private EditText etPhone;
     private EditText etPassword;
     private String phone;
     private String password;
     private ProgressDialog pDialog;
-    public String login_url = "http://192.168.0.107/vorti_php/member/login.php";
+    public String login_url = "http://192.168.0.103/vorti_php/member/login.php";
     private SessionHandler session;
 
     @Override
