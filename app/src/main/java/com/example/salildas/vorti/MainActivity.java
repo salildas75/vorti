@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 case R.id.navigation_library:
                     toolbar.setTitle("Library");
-                    fragment = new HomeFragment();
+                    fragment = new LibraryFragment();
                     loadFragment(fragment);
                     return true;
                 case R.id.navigation_bookmark:
