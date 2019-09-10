@@ -32,10 +32,23 @@ public class ProfileActivity extends AppCompatActivity {
         role.setText(user.getRole());
 
         Button logoutBtn = findViewById(R.id.btnLogout);
+        Button newPostBtn = findViewById(R.id.btnNewPost);
+
+        if(user.getRole().equals("Regular")){
+            newPostBtn.setVisibility(View.GONE);
+        }
+
+        newPostBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(ProfileActivity.this, NewPostActivity.class);
+                startActivity(i);
+            }
+        });
 
         logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 session.logoutUser();
                 Intent i = new Intent(ProfileActivity.this, LoginActivity.class);
                 startActivity(i);

@@ -224,10 +224,10 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="400dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:weightSum="2"
+        android:weightSum="3"
         android:layout_marginTop="25dp">
 
         <Button
@@ -238,6 +238,14 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:text="Edit Profile" />
+        <Button
+            android:id="@+id/btnNewPost"
+            android:textColor="#fff"
+            android:background="#1976D2"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="New Post" />
 
         <Button
             android:id="@+id/btnLogout"

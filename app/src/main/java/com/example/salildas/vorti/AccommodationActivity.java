@@ -18,7 +18,7 @@ import java.util.HashMap;
 
 public class AccommodationActivity extends AppCompatActivity {
 
-    private String accommodationURL = "http://192.168.1.101/vorti_php/member/accommodation.php";
+    private String accommodationURL = "http://192.168.0.104/vorti_php/member/accommodation.php";
     private final int jsoncode = 1;
     private ListView listView;
     ArrayList<Property> propertyArrayList;
