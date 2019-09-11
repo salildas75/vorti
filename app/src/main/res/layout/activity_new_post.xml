@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#304769"
+    android:gravity="fill_vertical"
+    android:orientation="vertical"
+    android:padding="40dp"
+    tools:context=".NewPostActivity">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Add Your Room"
+        android:textAllCaps="true"
+        android:textColor="@android:color/white"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        android:padding="20dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="5"
+        android:layout_margin="10dp">
+
+        <EditText
+            android:id="@+id/etStreetNo"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:hint="Street No"
+            android:inputType="number"
+            android:padding="10dp"
+            android:layout_margin="5dp"/>
+
+        <EditText
+            android:id="@+id/etStreetName"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:hint="Street Name"
+            android:inputType="textAutoComplete"
+            android:padding="10dp"
+            android:layout_margin="5dp"/>
+        <EditText
+            android:id="@+id/etCity"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:hint="City"
+            android:inputType="textAutoComplete"
+            android:padding="10dp"
+            android:layout_margin="5dp"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="4"
+        android:padding="5dp"
+        android:layout_margin="10dp">
+
+        <EditText
+            android:id="@+id/etState"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:hint="State"
+            android:inputType="textAutoComplete"
+            android:padding="10dp"
+            android:layout_margin="5dp"/>
+
+        <EditText
+            android:id="@+id/etSeat"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:hint="Seats"
+            android:inputType="number"
+            android:padding="10dp"
+            android:layout_margin="5dp"/>
+        <EditText
+            android:id="@+id/etBathroom"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:hint="Baths"
+            android:inputType="number"
+            android:padding="10dp"
+            android:layout_margin="5dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="4"
+        android:padding="5dp"
+        android:layout_margin="10dp">
+
+        <Button
+            android:id="@+id/pick_image_button"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:text="Choose Here" />
+
+        <ImageView
+            android:id="@+id/image_view"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="50dp"
+            android:src="@drawable/logo" />
+        <EditText
+            android:id="@+id/etPrice"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:hint="Price"
+            android:inputType="number"
+            android:padding="10dp"
+            android:layout_margin="5dp"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnPostSave"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="#f05924"
+        android:text="Save"
+        android:textColor="@android:color/white"/>
+
+</LinearLayout>
