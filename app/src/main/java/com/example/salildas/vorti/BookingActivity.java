@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -98,6 +99,18 @@ public class BookingActivity extends AppCompatActivity {
                     propertyArrayList = getInfo(response);
                     propertyAdapter = new PropertyAdapter(this,propertyArrayList);
                     listView.setAdapter(propertyAdapter);
+
+                    listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, final View view,
+                                                int position, long id) {
+                            Toast.makeText(getApplicationContext(),
+                                    "Click ListItem Number " + position, Toast.LENGTH_LONG)
+                                    .show();
+                        }
+
+                    });
 
                 }else {
                     Toast.makeText(BookingActivity.this, getErrorCode(), Toast.LENGTH_SHORT).show();

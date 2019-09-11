@@ -91,6 +91,8 @@ public class PDFMainActivity extends AppCompatActivity {
     */
     public class JSONDownloader {
         private static final String PDF_SITE_URL="http://192.168.0.104/vorti_php/member/pdfstore.php";
+        private static final String PDF_URL="http://192.168.0.104/vorti_php/member/admin/pdf/";
+        private static final String PDF_ICON="http://192.168.0.104/vorti_php/member/admin/iconpdf/";
         private final Context c;
         private GridViewAdapter adapter ;
         public JSONDownloader(Context c) {
@@ -128,8 +130,8 @@ public class PDFMainActivity extends AppCompatActivity {
                                     p.setName(name);
                                     p.setCategory(category);
                                     p.setCategory(description);
-                                    p.setPdfURL(PDF_SITE_URL+pdfURL);
-                                    p.setPdfIconURL(PDF_SITE_URL+pdfIconURL);
+                                    p.setPdfURL(PDF_URL+pdfURL);
+                                    p.setPdfIconURL(PDF_ICON+pdfIconURL);
                                     pdfDocuments.add(p);
                                 }
                                 adapter =new GridViewAdapter(c,pdfDocuments);
