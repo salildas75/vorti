@@ -2,11 +2,13 @@ package com.example.salildas.vorti;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -27,6 +29,7 @@ public class RegisterActivity extends AppCompatActivity {
     private static final String KEY_PHONE = "phone";
     private static final String KEY_PASSWORD = "password";
     private static final String KEY_EMAIL = "email";
+    private static final String KEY_IMAGE = "image";
     private static final String KEY_ROLL = "roll";
     private static final String KEY_ROLE = "role";
     private static final String KEY_EMPTY = "";
@@ -48,6 +51,11 @@ public class RegisterActivity extends AppCompatActivity {
     private ProgressDialog pDialog;
     public String register_url = "http://192.168.0.104/vorti_php/member/register.php";
     private SessionHandler session;
+    Uri imageUri;
+
+    private static final int PICK_IMAGE = 100;
+    private ImageView imageView;
+    Button buttonChoose;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +87,10 @@ public class RegisterActivity extends AppCompatActivity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                imageView = (ImageView) findViewById(R.id.imageView);
+                buttonChoose = (Button) findViewById(R.id.buttonChoose);
+
                 //Retrieve the data entered in the edit texts
                 fullName = etFullName.getText().toString().trim();
                 phone = etPhone.getText().toString().trim();
@@ -91,6 +103,13 @@ public class RegisterActivity extends AppCompatActivity {
                 radioRoleButton = (RadioButton) findViewById(selectedId);
                 role = radioRoleButton.getText().toString().trim();
 
+                buttonChoose.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        openGallery();
+                    }
+                });
+
                 if (validateInputs()) {
                     registerUser();
                 }
@@ -99,6 +118,24 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
     }
+
+
+    private void openGallery() {
+        Intent gallery =
+                new Intent(Intent.ACTION_PICK,
+                        android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+        startActivityForResult(gallery, PICK_IMAGE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && requestCode == PICK_IMAGE) {
+            imageUri = data.getData();
+            imageView.setImageURI(imageUri);
+        }
+    }
+
 
     /**
      * Display Progress bar while registering
@@ -133,6 +170,7 @@ public class RegisterActivity extends AppCompatActivity {
             request.put(KEY_EMAIL, email);
             request.put(KEY_ROLL, roll);
             request.put(KEY_ROLE, role);
+            request.put(KEY_IMAGE, imageUri);
 
         } catch (JSONException e) {
             e.printStackTrace();

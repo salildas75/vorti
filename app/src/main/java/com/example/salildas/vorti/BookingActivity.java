@@ -25,6 +25,17 @@ import static com.example.salildas.vorti.AccommodationActivity.showSimpleProgres
 
 public class BookingActivity extends AppCompatActivity {
 
+    public static final String KEY_STREET_NO = "streetNo";
+    public static final String KEY_STREET_NAME = "streetName";
+    public static final String KEY_CITY = "city";
+    public static final String KEY_STATE = "state";
+    public static final String KEY_USER_CONTACT = "userContact";
+    public static final String KEY_RATING = "rating";
+    public static final String KEY_IMAGE = "image";
+    public static final String KEY_PRICE = "price";
+    public static final String KEY_SEAT = "seat";
+    public static final String KEY_BATHROOM = "bathroom";
+
     private static final String KEY_EMPTY = "";
 
     private EditText etCity;
@@ -105,9 +116,21 @@ public class BookingActivity extends AppCompatActivity {
                         @Override
                         public void onItemClick(AdapterView<?> parent, final View view,
                                                 int position, long id) {
-                            Toast.makeText(getApplicationContext(),
-                                    "Click ListItem Number " + position, Toast.LENGTH_LONG)
-                                    .show();
+                            Intent intent = new Intent(BookingActivity.this, DetailsActivity.class);
+                            Property clickedItem = propertyArrayList.get(position);
+
+                            intent.putExtra(KEY_STREET_NO,clickedItem.getStreetNumber());
+                            intent.putExtra(KEY_STREET_NAME,clickedItem.getStreetName());
+                            intent.putExtra(KEY_CITY,clickedItem.getCity());
+                            intent.putExtra(KEY_STATE,clickedItem.getState());
+                            intent.putExtra(KEY_USER_CONTACT,clickedItem.getContact());
+                            intent.putExtra(KEY_RATING,clickedItem.getRating());
+                            intent.putExtra(KEY_IMAGE,clickedItem.getImage());
+                            intent.putExtra(KEY_PRICE,clickedItem.getPrice());
+                            intent.putExtra(KEY_SEAT,clickedItem.getSeats());
+                            intent.putExtra(KEY_BATHROOM,clickedItem.getBathrooms());
+
+                            startActivity(intent);
                         }
 
                     });

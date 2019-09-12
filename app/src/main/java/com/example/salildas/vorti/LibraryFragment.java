@@ -68,16 +68,8 @@ public class LibraryFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_library, container, false);
 
-        Button pdfBtn = (Button)view.findViewById(R.id.btnGoPDF);
-
-        //For map page onclick
-        pdfBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
                 Intent i = new Intent(getActivity(), PDFMainActivity.class);
                 startActivity(i);
-            }
-        });
 
         return view;
     }

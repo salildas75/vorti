@@ -6,13 +6,6 @@
     tools:context=".LibraryFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <Button
-        android:id="@+id/btnGoPDF"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:background="#f05924"
-        android:text="Go to the book store"
-        android:textColor="@android:color/white" />
+
 
 </FrameLayout>

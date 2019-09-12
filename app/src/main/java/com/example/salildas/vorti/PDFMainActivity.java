@@ -91,8 +91,8 @@ public class PDFMainActivity extends AppCompatActivity {
     */
     public class JSONDownloader {
         private static final String PDF_SITE_URL="http://192.168.0.104/vorti_php/member/pdfstore.php";
-        private static final String PDF_URL="http://192.168.0.104/vorti_php/member/admin/pdf/";
-        private static final String PDF_ICON="http://192.168.0.104/vorti_php/member/admin/iconpdf/";
+        private static final String PDF_URL="http://192.168.0.104/vorti_php/member/admin/pdf/filepdf/";
+        private static final String PDF_ICON="http://192.168.0.104/vorti_php/member/admin/pdf/iconpdf/";
         private final Context c;
         private GridViewAdapter adapter ;
         public JSONDownloader(Context c) {

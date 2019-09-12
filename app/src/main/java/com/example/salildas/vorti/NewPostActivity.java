@@ -61,6 +61,7 @@ public class NewPostActivity extends AppCompatActivity{
 
     private static final int PICK_IMAGE = 100;
     private ImageView imageView;
+    Button pickImageButton;
 
     private Button btnPostSave;  // The save button
 
@@ -91,7 +92,7 @@ public class NewPostActivity extends AppCompatActivity{
             public void onClick(View view) {
 
                 imageView = (ImageView) findViewById(R.id.image_view);
-                Button pickImageButton = (Button) findViewById(R.id.pick_image_button);
+                pickImageButton = (Button) findViewById(R.id.pick_image_button);
 
                 streetNo = etStreetNo.getText().toString().trim();
                 streetName = etStreetName.getText().toString().trim();
