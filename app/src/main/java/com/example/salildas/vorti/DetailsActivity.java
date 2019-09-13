@@ -30,16 +30,16 @@ public class DetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_details);
 
         Intent intent = getIntent();
-        String streetNo = intent.getStringExtra(KEY_STREET_NO);
+        int streetNo = intent.getIntExtra(KEY_STREET_NO, 0);
         String streetName = intent.getStringExtra(KEY_STREET_NAME);
         String city = intent.getStringExtra(KEY_CITY);
         String state = intent.getStringExtra(KEY_STATE);
-        String userContact = intent.getStringExtra(KEY_USER_CONTACT);
-        String rating = intent.getStringExtra(KEY_RATING);
+        int userContact = intent.getIntExtra(KEY_USER_CONTACT,0);
+        double rating = intent.getDoubleExtra(KEY_RATING,0.0);
         String image = intent.getStringExtra(KEY_IMAGE);
-        String price = intent.getStringExtra(KEY_PRICE);
-        String seat = intent.getStringExtra(KEY_SEAT);
-        String bathroom = intent.getStringExtra(KEY_BATHROOM);
+        double price = intent.getDoubleExtra(KEY_PRICE,0.0);
+        int seat = intent.getIntExtra(KEY_SEAT,0);
+        int bathroom = intent.getIntExtra(KEY_BATHROOM,0);
 
         ivImage = (ImageView) findViewById(R.id.image);
         tvAddress = (TextView) findViewById(R.id.address);
@@ -50,7 +50,7 @@ public class DetailsActivity extends AppCompatActivity {
         tvBathroom = (TextView) findViewById(R.id.bathroom);
 
         Picasso.get().load(image).into(ivImage);
-        tvAddress.setText("Address: "+streetNo+streetName+city+state);
+        tvAddress.setText("Address: "+streetNo + ", " + streetName + ", " + city + ", " + state);
         tvContact.setText("Contact: "+userContact);
         tvRating.setText("Rating: "+rating);
         tvPrice.setText("Price: "+price);

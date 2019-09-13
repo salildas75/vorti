@@ -8,6 +8,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 import org.json.JSONArray;
@@ -17,6 +19,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class AccommodationActivity extends AppCompatActivity {
+
+    public static final String KEY_STREET_NO = "streetNo";
+    public static final String KEY_STREET_NAME = "streetName";
+    public static final String KEY_CITY = "city";
+    public static final String KEY_STATE = "state";
+    public static final String KEY_USER_CONTACT = "userContact";
+    public static final String KEY_RATING = "rating";
+    public static final String KEY_IMAGE = "image";
+    public static final String KEY_PRICE = "price";
+    public static final String KEY_SEAT = "seat";
+    public static final String KEY_BATHROOM = "bathroom";
 
     private String accommodationURL = "http://192.168.0.104/vorti_php/member/accommodation.php";
     private final int jsoncode = 1;
@@ -77,6 +90,30 @@ public class AccommodationActivity extends AppCompatActivity {
                     propertyArrayList = getInfo(response);
                     propertyAdapter = new PropertyAdapter(this,propertyArrayList);
                     listView.setAdapter(propertyAdapter);
+
+                    listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, final View view,
+                                                int position, long id) {
+                            Intent intent = new Intent(AccommodationActivity.this, DetailsActivity.class);
+                            Property clickedItem = propertyArrayList.get(position);
+
+                            intent.putExtra(KEY_STREET_NO,clickedItem.getStreetNumber());
+                            intent.putExtra(KEY_STREET_NAME,clickedItem.getStreetName());
+                            intent.putExtra(KEY_CITY,clickedItem.getCity());
+                            intent.putExtra(KEY_STATE,clickedItem.getState());
+                            intent.putExtra(KEY_USER_CONTACT,clickedItem.getContact());
+                            intent.putExtra(KEY_RATING,clickedItem.getRating());
+                            intent.putExtra(KEY_IMAGE,clickedItem.getImage());
+                            intent.putExtra(KEY_PRICE,clickedItem.getPrice());
+                            intent.putExtra(KEY_SEAT,clickedItem.getSeats());
+                            intent.putExtra(KEY_BATHROOM,clickedItem.getBathrooms());
+
+                            startActivity(intent);
+                        }
+
+                    });
 
                 }else {
                     Toast.makeText(AccommodationActivity.this, getErrorCode(), Toast.LENGTH_SHORT).show();
