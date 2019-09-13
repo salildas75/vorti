@@ -49,8 +49,7 @@ public class RegisterActivity extends AppCompatActivity {
     private String roll;
     private String role;
     private ProgressDialog pDialog;
-    public String register_url = "http://192.168.0.104/vorti_php/member/register.php";
-    private SessionHandler session;
+    public String register_url = "http://192.168.0.102/vorti_php/member/register.php";
     Uri imageUri;
 
     private static final int PICK_IMAGE = 100;
@@ -60,7 +59,6 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        session = new SessionHandler(getApplicationContext());
         setContentView(R.layout.activity_register);
         etFullName = findViewById(R.id.etFullName);
         etPhone = findViewById(R.id.etPhone);
@@ -153,7 +151,7 @@ public class RegisterActivity extends AppCompatActivity {
      * Launch Dashboard Activity on Successful Sign Up
      */
     private void loadProfile() {
-        Intent i = new Intent(getApplicationContext(), ProfileActivity.class);
+        Intent i = new Intent(RegisterActivity.this, LoginActivity.class);
         startActivity(i);
         finish();
 
@@ -183,8 +181,6 @@ public class RegisterActivity extends AppCompatActivity {
                         try {
                             //Check if user got registered successfully
                             if (response.getInt(KEY_STATUS) == 0) {
-                                //Set the user session
-                                session.loginUser(phone, fullName, email, roll, role);
                                 loadProfile();
 
                             } else if (response.getInt(KEY_STATUS) == 1) {

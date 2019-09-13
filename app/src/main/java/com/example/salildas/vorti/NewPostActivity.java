@@ -55,7 +55,7 @@ public class NewPostActivity extends AppCompatActivity{
     private String price;
     private String userPhone;
     private ProgressDialog pDialog;
-    public String add_post_url = "http://192.168.0.104/vorti_php/member/add_post.php";
+    public String add_post_url = "http://192.168.0.102/vorti_php/member/add_post.php";
     private SessionHandler session;
     Uri imageUri;
 

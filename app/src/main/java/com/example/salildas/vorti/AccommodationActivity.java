@@ -31,7 +31,7 @@ public class AccommodationActivity extends AppCompatActivity {
     public static final String KEY_SEAT = "seat";
     public static final String KEY_BATHROOM = "bathroom";
 
-    private String accommodationURL = "http://192.168.0.104/vorti_php/member/accommodation.php";
+    private String accommodationURL = "http://192.168.0.102/vorti_php/member/accommodation.php";
     private final int jsoncode = 1;
     private ListView listView;
     ArrayList<Property> propertyArrayList;
