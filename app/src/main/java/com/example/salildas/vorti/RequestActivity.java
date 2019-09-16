@@ -32,7 +32,6 @@ public class RequestActivity extends AppCompatActivity {
 
     private static final String KEY_STATUS = "status";
     private static final String KEY_MESSAGE = "message";
-
     private static final String KEY_REGULAR_PHONE = "regular_phone";
     private static final String KEY_START_DATE = "start_date";
     private static final String KEY_END_DATE = "end_date";

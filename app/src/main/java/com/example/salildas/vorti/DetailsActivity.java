@@ -36,7 +36,10 @@ public class DetailsActivity extends AppCompatActivity {
     public static final String KEY_RENTER_PHONE = "renter_phone";
     public static final String KEY_ROOM_PRICE = "price";
 
+    private SessionHandler session;
+
     private int renterUserPhone;
+    private int regularUserPhone;
     private double roomPricePerDay;
 
     TextView tvAddress, tvContact, tvRating, tvPrice, tvSeat, tvBathroom, tvDistance;
@@ -47,6 +50,10 @@ public class DetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
+
+        session = new SessionHandler(getApplicationContext());
+        User user = session.getUserDetails();
+        regularUserPhone = Integer.parseInt(user.getPhone());
 
         Intent intent = getIntent();
         int streetNo = intent.getIntExtra(KEY_STREET_NO, 0);
@@ -85,10 +92,16 @@ public class DetailsActivity extends AppCompatActivity {
                 renterUserPhone = userContact;
                 roomPricePerDay = price;
 
-                Intent intent = new Intent(DetailsActivity.this, RequestActivity.class);
-                intent.putExtra(KEY_RENTER_PHONE,renterUserPhone);
-                intent.putExtra(KEY_ROOM_PRICE,roomPricePerDay);
-                startActivity(intent);
+                if(renterUserPhone!=regularUserPhone) {
+
+                    Intent intent = new Intent(DetailsActivity.this, RequestActivity.class);
+                    intent.putExtra(KEY_RENTER_PHONE, renterUserPhone);
+                    intent.putExtra(KEY_ROOM_PRICE, roomPricePerDay);
+                    startActivity(intent);
+                }else{
+                    Toast.makeText(getApplicationContext(),
+                            "This is your accommodation", Toast.LENGTH_SHORT).show();
+                }
 
             }
         });
