@@ -19,7 +19,9 @@ import java.util.HashMap;
 
 public class VarsityActivity extends AppCompatActivity {
 
-    private String universityURL = "http://192.168.0.102/vorti_php/member/university_all.php";
+    Constants constants = new Constants();
+
+    private String universityURL = constants.baseURL+"member/university_all.php";
     private final int jsoncode = 1;
     private ListView listView;
     ArrayList<University> universityArrayList;

@@ -33,6 +33,9 @@ public class RegisterActivity extends AppCompatActivity {
     private static final String KEY_ROLL = "roll";
     private static final String KEY_ROLE = "role";
     private static final String KEY_EMPTY = "";
+
+    Constants constants = new Constants();
+
     private EditText etFullName;
     private EditText etPhone;
     private EditText etPassword;
@@ -49,7 +52,7 @@ public class RegisterActivity extends AppCompatActivity {
     private String roll;
     private String role;
     private ProgressDialog pDialog;
-    public String register_url = "http://192.168.0.102/vorti_php/member/register.php";
+    public String register_url = constants.baseURL+"member/register.php";
     Uri imageUri;
 
     private static final int PICK_IMAGE = 100;

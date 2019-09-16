@@ -25,6 +25,9 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class PDFMainActivity extends AppCompatActivity {
+
+    Constants constants = new Constants();
+
     public class PDFDoc {
         int id;
         String name,category,pdfURL,pdfIconURL;
@@ -90,9 +93,10 @@ public class PDFMainActivity extends AppCompatActivity {
     Our HTTP Client
     */
     public class JSONDownloader {
-        private static final String PDF_SITE_URL="http://192.168.0.102/vorti_php/member/pdfstore.php";
-        private static final String PDF_URL="http://192.168.0.102/vorti_php/member/admin/pdf/filepdf/";
-        private static final String PDF_ICON="http://192.168.0.102/vorti_php/member/admin/pdf/iconpdf/";
+
+        private final String PDF_SITE_URL= constants.baseURL+"member/pdfstore.php";
+        private final String PDF_URL= constants.baseURL+"member/admin/pdf/filepdf/";
+        private final String PDF_ICON= constants.baseURL+"member/admin/pdf/iconpdf/";
         private final Context c;
         private GridViewAdapter adapter ;
         public JSONDownloader(Context c) {

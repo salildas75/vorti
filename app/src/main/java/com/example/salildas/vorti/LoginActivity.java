@@ -29,12 +29,15 @@ public class LoginActivity extends AppCompatActivity {
     private static final String KEY_ROLL = "roll";
     private static final String KEY_ROLE = "role";
     private static final String KEY_EMPTY = "";
+
+    Constants constants = new Constants();
+
     private EditText etPhone;
     private EditText etPassword;
     private String phone;
     private String password;
     private ProgressDialog pDialog;
-    public String login_url = "http://192.168.0.102/vorti_php/member/login.php";
+    public String login_url = constants.baseURL+"member/login.php";
     private SessionHandler session;
 
     @Override

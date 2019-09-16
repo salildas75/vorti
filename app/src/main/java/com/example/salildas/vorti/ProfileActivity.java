@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ProfileActivity extends AppCompatActivity {
     private SessionHandler session;
@@ -33,6 +34,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         Button logoutBtn = findViewById(R.id.btnLogout);
         Button newPostBtn = findViewById(R.id.btnNewPost);
+        TextView requestTv = findViewById(R.id.tvRequest);
 
         if(user.getRole().equals("Regular")){
             newPostBtn.setVisibility(View.GONE);
@@ -56,6 +58,20 @@ public class ProfileActivity extends AppCompatActivity {
 
             }
         });
+
+        requestTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+
+
+                Toast.makeText(ProfileActivity.this,
+                        "hi", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
     }
 
 }

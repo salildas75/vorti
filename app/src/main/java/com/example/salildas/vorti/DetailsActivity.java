@@ -1,12 +1,24 @@
 package com.example.salildas.vorti;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.squareup.picasso.Picasso;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import static com.example.salildas.vorti.BookingActivity.KEY_BATHROOM;
 import static com.example.salildas.vorti.BookingActivity.KEY_CITY;
@@ -21,9 +33,16 @@ import static com.example.salildas.vorti.BookingActivity.KEY_USER_CONTACT;
 
 public class DetailsActivity extends AppCompatActivity {
 
+    public static final String KEY_RENTER_PHONE = "renter_phone";
+    public static final String KEY_ROOM_PRICE = "price";
+
+    private int renterUserPhone;
+    private double roomPricePerDay;
 
     TextView tvAddress, tvContact, tvRating, tvPrice, tvSeat, tvBathroom, tvDistance;
     ImageView ivImage;
+    Button btnProcess;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,10 +53,10 @@ public class DetailsActivity extends AppCompatActivity {
         String streetName = intent.getStringExtra(KEY_STREET_NAME);
         String city = intent.getStringExtra(KEY_CITY);
         String state = intent.getStringExtra(KEY_STATE);
-        int userContact = intent.getIntExtra(KEY_USER_CONTACT,0);
+        final int userContact = intent.getIntExtra(KEY_USER_CONTACT,0);
         double rating = intent.getDoubleExtra(KEY_RATING,0.0);
         String image = intent.getStringExtra(KEY_IMAGE);
-        double price = intent.getDoubleExtra(KEY_PRICE,0.0);
+        final double price = intent.getDoubleExtra(KEY_PRICE,0.0);
         int seat = intent.getIntExtra(KEY_SEAT,0);
         int bathroom = intent.getIntExtra(KEY_BATHROOM,0);
 
@@ -49,6 +68,8 @@ public class DetailsActivity extends AppCompatActivity {
         tvSeat = (TextView) findViewById(R.id.seat);
         tvBathroom = (TextView) findViewById(R.id.bathroom);
 
+        btnProcess = (Button) findViewById(R.id.btnProcess);
+
         Picasso.get().load(image).into(ivImage);
         tvAddress.setText("Address: "+streetNo + ", " + streetName + ", " + city + ", " + state);
         tvContact.setText("Contact: "+userContact);
@@ -57,6 +78,22 @@ public class DetailsActivity extends AppCompatActivity {
         tvSeat.setText("Seat: "+seat);
         tvBathroom.setText("Bathroom: "+bathroom);
 
+        btnProcess.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Retrieve the data entered in the edit texts
+                renterUserPhone = userContact;
+                roomPricePerDay = price;
+
+                Intent intent = new Intent(DetailsActivity.this, RequestActivity.class);
+                intent.putExtra(KEY_RENTER_PHONE,renterUserPhone);
+                intent.putExtra(KEY_ROOM_PRICE,roomPricePerDay);
+                startActivity(intent);
+
+            }
+        });
+
 
     }
+
 }
