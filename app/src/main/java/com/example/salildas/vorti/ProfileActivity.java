@@ -46,7 +46,7 @@ public class ProfileActivity extends AppCompatActivity {
 
 
         session = new SessionHandler(getApplicationContext());
-        User user = session.getUserDetails();
+        final User user = session.getUserDetails();
 
         regularPhone = user.getPhone();
 
@@ -92,8 +92,11 @@ public class ProfileActivity extends AppCompatActivity {
         requestTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                showRequest();
+                if(user.getRole().equals("Regular")) {
+                    showRequest();
+                }else{
+                    showReceiveRequest();
+                }
 
             }
         });
@@ -115,6 +118,14 @@ public class ProfileActivity extends AppCompatActivity {
 
     }
 
+    private void showReceiveRequest(){
+
+        Intent intent = new Intent(ProfileActivity.this, ReceiveRequestShowActivity.class);
+        startActivity(intent);
+
+    }
+
+
     private void showRequest() {
         displayLoader();
         JSONObject request = new JSONObject();
@@ -133,7 +144,6 @@ public class ProfileActivity extends AppCompatActivity {
                         pDialog.dismiss();
                         try {
                             //Check Request
-                            if(response.getString(KEY_REQUEST_STATUS).equals("pending")){
 
                                 if (response.getInt(KEY_STATUS) == 0) {
 
@@ -156,10 +166,7 @@ public class ProfileActivity extends AppCompatActivity {
                                     Toast.makeText(getApplicationContext(),
                                             response.getString(KEY_MESSAGE), Toast.LENGTH_SHORT).show();
                                 }
-                            }else {
-                                Toast.makeText(getApplicationContext(),
-                                        "Your request has been accepted", Toast.LENGTH_SHORT).show();
-                            }
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

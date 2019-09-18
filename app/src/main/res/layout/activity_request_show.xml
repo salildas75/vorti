@@ -8,7 +8,17 @@
     android:orientation="vertical"
     tools:context=".RequestShowActivity">
 
-
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Request Accommodation"
+        android:textAllCaps="true"
+        android:layout_margin="20dp"
+        android:textColor="@android:color/white"
+        android:textSize="26sp"
+        android:textStyle="bold" />
 
     <LinearLayout
         android:layout_marginTop="15dp"
@@ -174,7 +184,16 @@
             android:layout_height="wrap_content"
             android:paddingLeft="20dp"
             android:text="0" />
+
     </LinearLayout>
+    <TextView
+        android:id="@+id/acceptStatus"
+        android:textColor="#fff"
+        android:layout_gravity="center_vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="35dp"
+        android:textSize="20sp" />
 
     <LinearLayout
         android:layout_width="match_parent"

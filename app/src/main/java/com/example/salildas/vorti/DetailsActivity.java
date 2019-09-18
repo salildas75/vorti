@@ -52,7 +52,7 @@ public class DetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_details);
 
         session = new SessionHandler(getApplicationContext());
-        User user = session.getUserDetails();
+        final User user = session.getUserDetails();
         regularUserPhone = Integer.parseInt(user.getPhone());
 
         Intent intent = getIntent();
@@ -92,7 +92,7 @@ public class DetailsActivity extends AppCompatActivity {
                 renterUserPhone = userContact;
                 roomPricePerDay = price;
 
-                if(renterUserPhone!=regularUserPhone) {
+                if(user.getRole().equals("Regular")) {
 
                     Intent intent = new Intent(DetailsActivity.this, RequestActivity.class);
                     intent.putExtra(KEY_RENTER_PHONE, renterUserPhone);
@@ -100,7 +100,7 @@ public class DetailsActivity extends AppCompatActivity {
                     startActivity(intent);
                 }else{
                     Toast.makeText(getApplicationContext(),
-                            "This is your accommodation", Toast.LENGTH_SHORT).show();
+                            "If you need an accommodation, then you should register as a regular user", Toast.LENGTH_LONG).show();
                 }
 
             }

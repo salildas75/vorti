@@ -38,8 +38,8 @@ public class RequestShowActivity extends AppCompatActivity {
     Constants constants = new Constants();
     public String cancel_request_url = constants.baseURL+"member/cancel_request.php";
 
-    TextView tvRenterPhone, tvStartDate, tvEndDate, tvTotalPrice, tvDayCount, tvRequestStatus, tvCreatedAt;
-    Button btnCancel;
+    TextView tvRenterPhone, tvStartDate, tvEndDate, tvTotalPrice, tvDayCount, tvRequestStatus, tvCreatedAt, tvAcceptStatus;
+    Button cancelBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,8 +67,9 @@ public class RequestShowActivity extends AppCompatActivity {
         tvDayCount = (TextView) findViewById(R.id.dayCount);
         tvRequestStatus = (TextView) findViewById(R.id.requestStatus);
         tvCreatedAt = (TextView) findViewById(R.id.requestTime);
+        tvAcceptStatus = (TextView) findViewById(R.id.acceptStatus);
 
-        btnCancel = (Button) findViewById(R.id.btnCancel);
+        cancelBtn = (Button) findViewById(R.id.btnCancel);
 
         tvRenterPhone.setText(""+renterPhone);
         tvStartDate.setText(""+startDate);
@@ -78,12 +79,19 @@ public class RequestShowActivity extends AppCompatActivity {
         tvRequestStatus.setText(""+requestStatus);
         tvCreatedAt.setText(""+createdAt);
 
-        btnCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                cancelRequest();
-            }
-        });
+
+        if (requestStatus.equals("pending")) {
+
+            cancelBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    cancelRequest();
+                }
+            });
+        }else {
+            tvAcceptStatus.setText("Your request has been approved by renter. Renter will contact you.");
+            cancelBtn.setVisibility(View.GONE);
+        }
 
     }
 
@@ -106,6 +114,7 @@ public class RequestShowActivity extends AppCompatActivity {
         finish();
 
     }
+
 
     private void cancelRequest() {
         displayLoader();

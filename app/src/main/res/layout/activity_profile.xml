@@ -68,6 +68,15 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent">
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:id="@+id/tvRequest"
                     android:gravity="center"
                     android:orientation="vertical"
@@ -79,24 +88,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Request"
-                        android:textStyle="bold"
-                        android:textSize="20sp"
-                        android:paddingTop="10dp"
-                        android:textColor="#2196F3" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Accepted"
                         android:textStyle="bold"
                         android:textSize="20sp"
                         android:paddingTop="10dp"

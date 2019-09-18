@@ -177,11 +177,11 @@ public class AccommodationActivity extends AppCompatActivity {
     public String getErrorCode() {
 
         removeSimpleProgressDialog();  //will remove progress dialog
-        Intent i = new Intent(this, AccommodationActivity.class);
+        Intent i = new Intent(this, BookingActivity.class);
         startActivity(i);
         finish();
 
-        return "Not Found";
+        return "No Accommodation Found";
     }
 
     public static void removeSimpleProgressDialog() {

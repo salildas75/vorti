@@ -197,11 +197,11 @@ public class BookingActivity extends AppCompatActivity {
     public String getErrorCode() {
 
         removeSimpleProgressDialog();  //will remove progress dialog
-        Intent i = new Intent(this, BookingActivity.class);
+        Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
         finish();
 
-        return "Not Found";
+        return "No Accommodation Found";
     }
 
     public static void removeSimpleProgressDialog() {
