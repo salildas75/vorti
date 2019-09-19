@@ -82,20 +82,6 @@ public class ReceiveRequestShowActivity extends AppCompatActivity {
                     receiveRequestAdapter = new ReceiveRequestAdapter(this,receiveRequestArrayList);
                     receiveRequestListView.setAdapter(receiveRequestAdapter);
 
-//                    receiveRequestListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//
-//                        @Override
-//                        public void onItemClick(AdapterView<?> parent, final View view,
-//                                                int position, long id) {
-//
-//                            ReceiveRequest clickedItem = receiveRequestArrayList.get(position);
-//
-//                            String btnAccept = clickedItem.;
-//
-//                        }
-//
-//                    });
-
                 }else {
                     Toast.makeText(ReceiveRequestShowActivity.this, getErrorCode(), Toast.LENGTH_SHORT).show();
                 }
@@ -121,6 +107,7 @@ public class ReceiveRequestShowActivity extends AppCompatActivity {
                     receiveRequest.setTotalPrice(dataobj.getDouble("req_total_price"));
                     receiveRequest.setDayCount(dataobj.getInt("req_day_count"));
                     receiveRequest.setRegularFullName(dataobj.getString("user_full_name"));
+                    receiveRequest.setReqStatus(dataobj.getString("req_status"));
                     receiveRequest.setReqDate(dataobj.getString("req_created_at"));
 
                     receiveRequestArrayList.add(receiveRequest);
@@ -160,29 +147,5 @@ public class ReceiveRequestShowActivity extends AppCompatActivity {
         return "No Request Found";
     }
 
-
-    public void AcceptButton(View view) {
-
-        Toast.makeText(this, "Request Accepted",Toast.LENGTH_LONG).show();
-
-    }
-
-    public void CancelButton(View view) {
-
-        Toast.makeText(this, "Request Cancel",Toast.LENGTH_LONG).show();
-
-    }
-
-    public void StartButton(View view) {
-
-        Toast.makeText(this, "Share Start",Toast.LENGTH_LONG).show();
-
-    }
-
-    public void CloseButton(View view) {
-
-        Toast.makeText(this, "Share Closed",Toast.LENGTH_LONG).show();
-
-    }
 
 }

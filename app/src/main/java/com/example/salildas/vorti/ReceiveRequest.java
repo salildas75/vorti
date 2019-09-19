@@ -10,6 +10,7 @@ public class ReceiveRequest {
     private double totalPrice;
     private int dayCount;
     private String regularFullName;
+    private String reqStatus;
     private String reqDate;
 
     public ReceiveRequest(){}
@@ -60,6 +61,14 @@ public class ReceiveRequest {
 
     public void setRegularFullName(String regularFullName) {
         this.regularFullName = regularFullName;
+    }
+
+    public String getReqStatus() {
+        return reqStatus;
+    }
+
+    public void setReqStatus(String reqStatus) {
+        this.reqStatus = reqStatus;
     }
 
     public String getReqDate() {

@@ -146,6 +146,30 @@
             android:paddingLeft="20dp"
             android:text="salil" />
     </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="15dp"
+        android:orientation="horizontal"
+        android:paddingLeft="25dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="#fff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Status:-" />
+
+        <TextView
+            android:id="@+id/requestStatus"
+            android:textColor="#fff"
+            android:layout_gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:text="Status" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_marginTop="15dp"
@@ -183,7 +207,6 @@
             android:id="@+id/btnAccept"
             android:textColor="#fff"
             android:background="#1976D2"
-            android:onClick="AcceptButton"
             android:layout_margin="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -192,7 +215,6 @@
             android:id="@+id/btnCancel"
             android:textColor="#fff"
             android:background="#1976D2"
-            android:onClick="CancelButton"
             android:layout_margin="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -201,7 +223,6 @@
             android:id="@+id/btnStart"
             android:textColor="#fff"
             android:background="#1976D2"
-            android:onClick="StartButton"
             android:layout_margin="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -210,7 +231,6 @@
             android:id="@+id/btnClose"
             android:textColor="#fff"
             android:background="#1976D2"
-            android:onClick="CloseButton"
             android:layout_margin="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
