@@ -1,6 +1,7 @@
 package com.example.salildas.vorti;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -244,6 +245,8 @@ public class ReceiveRequestAdapter extends BaseAdapter {
 
                     // Access the RequestQueue through your singleton class.
                     MySingleton.getInstance(context).addToRequestQueue(jsArrayRequest);
+
+                    //Intent intent = new Intent(view.getContext(), HomeFragment.class);
 
                 }
             });
