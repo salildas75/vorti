@@ -22,11 +22,15 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
+
 public class ReceiveRequestAdapter extends BaseAdapter {
 
     private static final String KEY_STATUS = "status";
     private static final String KEY_MESSAGE = "message";
     private static final String KEY_REGULAR_PHONE = "regular_phone";
+    private static final String KEY_TOTAL_COST = "total_cost";
+    private static final String KEY_REGULAR_NANE = "regular_name";
 
     Constants constants = new Constants();
     public String accept_request_url = constants.baseURL+"member/accept_request.php";
@@ -246,7 +250,7 @@ public class ReceiveRequestAdapter extends BaseAdapter {
                     // Access the RequestQueue through your singleton class.
                     MySingleton.getInstance(context).addToRequestQueue(jsArrayRequest);
 
-                    //Intent intent = new Intent(view.getContext(), HomeFragment.class);
+
 
                 }
             });
@@ -258,6 +262,11 @@ public class ReceiveRequestAdapter extends BaseAdapter {
                 public void onClick(final View view) {
 
                     int regularPhone = receiveRequestArrayList.get(position).getPhone();
+                    String reqStatus = receiveRequestArrayList.get(position).getReqStatus();
+                    double totalCost = receiveRequestArrayList.get(position).getTotalPrice();
+                    String regularName = receiveRequestArrayList.get(position).getRegularFullName();
+
+                    if (reqStatus.equals("started")) {
 
                     JSONObject request = new JSONObject();
                     try {
@@ -303,6 +312,19 @@ public class ReceiveRequestAdapter extends BaseAdapter {
                     // Access the RequestQueue through your singleton class.
                     MySingleton.getInstance(context).addToRequestQueue(jsArrayRequest);
 
+
+                    Intent intent = new Intent(context.getApplicationContext(), PaymentActivity.class);
+
+                    intent.putExtra(KEY_TOTAL_COST,totalCost);
+                    intent.putExtra(KEY_REGULAR_PHONE,regularPhone);
+                    intent.putExtra(KEY_REGULAR_NANE,regularName);
+
+                    intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
+                    context.getApplicationContext().startActivity(intent);
+                    }else {
+                        Toast.makeText(view.getContext(),
+                               "Firstly you have to start this", Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
 
