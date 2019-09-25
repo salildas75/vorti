@@ -2,21 +2,26 @@ package com.example.salildas.vorti;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.chaos.view.PinView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,6 +41,11 @@ public class RegisterActivity extends AppCompatActivity {
     private static final String KEY_EMPTY = "";
 
     Constants constants = new Constants();
+
+    private PinView pinView;
+    private TextView topText,textU,isAccount;
+    private LinearLayout first;
+    private ConstraintLayout second;
 
     private EditText etFullName;
     private EditText etPhone;
@@ -67,6 +77,15 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        topText = findViewById(R.id.topText);
+        pinView = findViewById(R.id.pinView);
+        isAccount = findViewById(R.id.isAccount);
+        first = findViewById(R.id.first_step);
+        second = findViewById(R.id.secondStep);
+        textU = findViewById(R.id.textView_noti);
+        first.setVisibility(View.VISIBLE);
+
         etFullName = findViewById(R.id.etFullName);
         etPhone = findViewById(R.id.etPhone);
         etPassword = findViewById(R.id.etPassword);
@@ -76,9 +95,12 @@ public class RegisterActivity extends AppCompatActivity {
         radioRoleGroup = findViewById(R.id.radioRole);
         radioGenderGroup = findViewById(R.id.radioGender);
 
+        imageView = (ImageView) findViewById(R.id.imageView);
+        buttonChoose = (Button) findViewById(R.id.buttonChoose);
 
-        Button login = findViewById(R.id.btnRegisterLogin);
-        Button register = findViewById(R.id.btnRegister);
+
+        final Button login = findViewById(R.id.btnRegisterLogin);
+        final Button register = findViewById(R.id.btnRegister);
 
         //Launch Login screen when Login Button is clicked
         login.setOnClickListener(new View.OnClickListener() {
@@ -90,12 +112,16 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
+        buttonChoose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openGallery();
+            }
+        });
+
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                imageView = (ImageView) findViewById(R.id.imageView);
-                buttonChoose = (Button) findViewById(R.id.buttonChoose);
 
                 //Retrieve the data entered in the edit texts
                 fullName = etFullName.getText().toString().trim();
@@ -115,15 +141,36 @@ public class RegisterActivity extends AppCompatActivity {
                 radioGenderButton = (RadioButton) findViewById(genderSelectedId);
                 gender = radioGenderButton.getText().toString().trim();
 
-                buttonChoose.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        openGallery();
-                    }
-                });
+
 
                 if (validateInputs()) {
-                    registerUser();
+
+                    if (register.getText().equals("Register")) {
+
+                        register.setText("Verify");
+                        first.setVisibility(View.GONE);
+                        isAccount.setVisibility(View.GONE);
+                        login.setVisibility(View.GONE);
+                        second.setVisibility(View.VISIBLE);
+                        topText.setText("I Still don't trust you.\nTell me something that only two of us know.");
+
+                    } else if (register.getText().equals("Verify")) {
+                        String OTP = pinView.getText().toString();
+                        if (OTP.equals("3456")) {
+                            pinView.setLineColor(Color.GREEN);
+                            textU.setText("OTP Verified");
+                            textU.setTextColor(Color.GREEN);
+                            register.setText("Next");
+                            if (register.getText().equals("Next")) {
+                                registerUser();
+                            }
+                        } else {
+                            pinView.setLineColor(Color.RED);
+                            textU.setText("X Incorrect OTP");
+                            textU.setTextColor(Color.RED);
+                        }
+                    }
+                    //registerUser();
                 }
 
             }
@@ -149,6 +196,8 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
 
+
+
     /**
      * Display Progress bar while registering
      */
@@ -165,6 +214,8 @@ public class RegisterActivity extends AppCompatActivity {
      * Launch Dashboard Activity on Successful Sign Up
      */
     private void loadProfile() {
+        Toast.makeText(getApplicationContext(),
+                "Your phone number is verified now. Waiting for admin approval", Toast.LENGTH_LONG).show();
         Intent i = new Intent(RegisterActivity.this, LoginActivity.class);
         startActivity(i);
         finish();
@@ -200,8 +251,17 @@ public class RegisterActivity extends AppCompatActivity {
 
                             } else if (response.getInt(KEY_STATUS) == 1) {
                                 //Display error message if number is already existsing
-                                etPhone.setError("Phone number already taken!");
-                                etPhone.requestFocus();
+                                Toast.makeText(getApplicationContext(),
+                                        "Phone number already taken!", Toast.LENGTH_LONG).show();
+                                Intent i = new Intent(RegisterActivity.this, RegisterActivity.class);
+                                startActivity(i);
+
+                            }else if (response.getInt(KEY_STATUS) == 2) {
+                                //Display error message if number is already existsing
+                                Toast.makeText(getApplicationContext(),
+                                        "Please insert a profile picture", Toast.LENGTH_LONG).show();
+                                Intent i = new Intent(RegisterActivity.this, RegisterActivity.class);
+                                startActivity(i);
 
                             } else {
                                 Toast.makeText(getApplicationContext(),
@@ -267,14 +327,14 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
         if (KEY_EMPTY.equals(email)) {
-            etPhone.setError("Email cannot be empty");
-            etPhone.requestFocus();
+            etEmail.setError("Email cannot be empty");
+            etEmail.requestFocus();
             return false;
         }
 
         if (KEY_EMPTY.equals(roll)) {
-            etPhone.setError("Roll cannot be empty");
-            etPhone.requestFocus();
+            etRoll.setError("Roll cannot be empty");
+            etRoll.requestFocus();
             return false;
         }
 
