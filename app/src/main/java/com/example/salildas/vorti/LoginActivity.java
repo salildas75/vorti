@@ -28,6 +28,7 @@ public class LoginActivity extends AppCompatActivity {
     private static final String KEY_EMAIL = "email";
     private static final String KEY_ROLL = "roll";
     private static final String KEY_ROLE = "role";
+    private static final String KEY_GENDER = "gender";
     private static final String KEY_EMPTY = "";
 
     Constants constants = new Constants();
@@ -123,7 +124,7 @@ public class LoginActivity extends AppCompatActivity {
                             //Check if user got logged in successfully
 
                             if (response.getInt(KEY_STATUS) == 0) {
-                                session.loginUser(phone, response.getString(KEY_FULL_NAME), response.getString(KEY_EMAIL), response.getString(KEY_ROLL), response.getString(KEY_ROLE));
+                                session.loginUser(phone, response.getString(KEY_FULL_NAME), response.getString(KEY_EMAIL), response.getString(KEY_ROLL), response.getString(KEY_ROLE), response.getString(KEY_GENDER));
                                 loadProfile();
 
                             } else {

@@ -39,7 +39,7 @@ public class AccommodationActivity extends AppCompatActivity {
     ArrayList<Property> propertyArrayList;
     private PropertyAdapter propertyAdapter;
     private String city;
-    private String seat;
+    private String gender;
 
     private static ProgressDialog mProgressDialog;
 
@@ -60,14 +60,14 @@ public class AccommodationActivity extends AppCompatActivity {
         showSimpleProgressDialog(this, "Loading...","Fetching Json",false);
 
         city = getIntent().getStringExtra("SEARCH_CITY");
-        seat = getIntent().getStringExtra("SEARCH_SEAT");
+        gender = getIntent().getStringExtra("SEARCH_GENDER");
 
         new AsyncTask<Void, Void, String>(){
             protected String doInBackground(Void[] params) {
                 String response="";
                 HashMap<String, String> map=new HashMap<>();
                 try {
-                    HttpRequest req = new HttpRequest(accommodationURL+"?city="+city+"&seat="+seat);
+                    HttpRequest req = new HttpRequest(accommodationURL+"?city="+city+"&gender="+gender);
                     response = req.prepare(HttpRequest.Method.POST).withData(map).sendAndReadString();
                 } catch (Exception e) {
                     response=e.getMessage();

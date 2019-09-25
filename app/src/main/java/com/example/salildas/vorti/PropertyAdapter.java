@@ -73,7 +73,7 @@ public class PropertyAdapter extends BaseAdapter {
 
         Picasso.get().load(propertyArrayList.get(position).getImage()).into(holder.ivImage);
         holder.tvAddress.setText("Address: "+propertyArrayList.get(position).getStreetNumber()+", "+propertyArrayList.get(position).getStreetName()+", "+propertyArrayList.get(position).getCity()+", "+propertyArrayList.get(position).getState());
-        holder.tvContact.setText("Contact: "+propertyArrayList.get(position).getContact());
+        //holder.tvContact.setText("Contact: "+propertyArrayList.get(position).getContact());
         holder.tvRating.setText("Rating: "+propertyArrayList.get(position).getRating());
         holder.tvPrice.setText("Price: "+propertyArrayList.get(position).getPrice());
         holder.tvSeat.setText("Seat: "+propertyArrayList.get(position).getSeats());

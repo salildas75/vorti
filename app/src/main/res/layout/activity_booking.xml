@@ -18,17 +18,6 @@
         android:inputType="textAutoComplete"
         android:padding="10dp" />
 
-
-    <EditText
-        android:id="@+id/etSearchSeat"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:background="@android:color/white"
-        android:hint="Seat"
-        android:inputType="numberDecimal"
-        android:padding="10dp" />
-
     <Button
         android:onClick="BookingSearch"
         android:layout_width="wrap_content"

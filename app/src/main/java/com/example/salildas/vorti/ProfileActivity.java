@@ -29,6 +29,7 @@ public class ProfileActivity extends AppCompatActivity {
     private static final String KEY_TOTAL_PRICE = "total_price";
     private static final String KEY_COUNT_DAY = "count_day";
     private static final String KEY_REQUEST_STATUS = "request_status";
+    private static final String KEY_RENTER_FULL_NAME = "renter_name";
     private static final String KEY_REQUEST_CREATED_AT = "request_created_at";
 
     private String regularPhone;
@@ -55,12 +56,14 @@ public class ProfileActivity extends AppCompatActivity {
         TextView email = findViewById(R.id.email);
         TextView roll = findViewById(R.id.roll);
         TextView role = findViewById(R.id.role);
+        TextView gender = findViewById(R.id.gender);
 
         fullName.setText(user.getFullName());
         phone.setText(user.getPhone());
         email.setText(user.getEmail());
         roll.setText(user.getRoll());
         role.setText(user.getRole());
+        gender.setText(user.getGender());
 
         Button logoutBtn = findViewById(R.id.btnLogout);
         Button newPostBtn = findViewById(R.id.btnNewPost);
@@ -155,6 +158,7 @@ public class ProfileActivity extends AppCompatActivity {
                                     intent.putExtra(KEY_TOTAL_PRICE,response.getDouble(KEY_TOTAL_PRICE));
                                     intent.putExtra(KEY_COUNT_DAY,response.getInt(KEY_COUNT_DAY));
                                     intent.putExtra(KEY_REQUEST_STATUS,response.getString(KEY_REQUEST_STATUS));
+                                    intent.putExtra(KEY_RENTER_FULL_NAME,response.getString(KEY_RENTER_FULL_NAME));
                                     intent.putExtra(KEY_REQUEST_CREATED_AT,response.getString(KEY_REQUEST_CREATED_AT));
 
                                     startActivity(intent);

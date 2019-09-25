@@ -32,6 +32,7 @@ public class RegisterActivity extends AppCompatActivity {
     private static final String KEY_IMAGE = "image";
     private static final String KEY_ROLL = "roll";
     private static final String KEY_ROLE = "role";
+    private static final String KEY_GENDER = "gender";
     private static final String KEY_EMPTY = "";
 
     Constants constants = new Constants();
@@ -44,6 +45,8 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText etRoll;
     private RadioGroup radioRoleGroup;
     private RadioButton radioRoleButton;
+    private RadioGroup radioGenderGroup;
+    private RadioButton radioGenderButton;
     private String fullName;
     private String phone;
     private String password;
@@ -51,6 +54,7 @@ public class RegisterActivity extends AppCompatActivity {
     private String email;
     private String roll;
     private String role;
+    private String gender;
     private ProgressDialog pDialog;
     public String register_url = constants.baseURL+"member/register.php";
     Uri imageUri;
@@ -70,6 +74,7 @@ public class RegisterActivity extends AppCompatActivity {
         etEmail = findViewById(R.id.etEmail);
         etRoll = findViewById(R.id.etRoll);
         radioRoleGroup = findViewById(R.id.radioRole);
+        radioGenderGroup = findViewById(R.id.radioGender);
 
 
         Button login = findViewById(R.id.btnRegisterLogin);
@@ -100,9 +105,15 @@ public class RegisterActivity extends AppCompatActivity {
                 email = etEmail.getText().toString().trim();
                 roll = etRoll.getText().toString().trim();
 
+                //for User Role
                 int selectedId = radioRoleGroup.getCheckedRadioButtonId();
                 radioRoleButton = (RadioButton) findViewById(selectedId);
                 role = radioRoleButton.getText().toString().trim();
+
+                //for User Gender
+                int genderSelectedId = radioGenderGroup.getCheckedRadioButtonId();
+                radioGenderButton = (RadioButton) findViewById(genderSelectedId);
+                gender = radioGenderButton.getText().toString().trim();
 
                 buttonChoose.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -171,6 +182,7 @@ public class RegisterActivity extends AppCompatActivity {
             request.put(KEY_EMAIL, email);
             request.put(KEY_ROLL, roll);
             request.put(KEY_ROLE, role);
+            request.put(KEY_GENDER, gender);
             request.put(KEY_IMAGE, imageUri);
 
         } catch (JSONException e) {

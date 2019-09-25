@@ -79,7 +79,7 @@ public class DetailsActivity extends AppCompatActivity {
 
         Picasso.get().load(image).into(ivImage);
         tvAddress.setText("Address: "+streetNo + ", " + streetName + ", " + city + ", " + state);
-        tvContact.setText("Contact: "+userContact);
+        //tvContact.setText("Contact: "+userContact);
         tvRating.setText("Rating: "+rating);
         tvPrice.setText("Price: "+price);
         tvSeat.setText("Seat: "+seat);

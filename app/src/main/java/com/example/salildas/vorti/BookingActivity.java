@@ -38,12 +38,12 @@ public class BookingActivity extends AppCompatActivity {
 
     private static final String KEY_EMPTY = "";
 
+    SessionHandler session;
     Constants constants = new Constants();
 
     private EditText etCity;
-    private EditText etSeat;
     private String city;
-    private String seat;
+    private String gender;
 //    For this List View
     private String accommodationURL = constants.baseURL+"member/booking_all.php";
     private final int jsoncode = 1;
@@ -57,22 +57,27 @@ public class BookingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booking);
 
+        session = new SessionHandler(getApplicationContext());
+        User user = session.getUserDetails();
+        gender = user.getGender();
+
         listView = findViewById(R.id.accommodationListView);
 
         fetchJSON();
 
+
+
         etCity = findViewById(R.id.etSearchCity);
-        etSeat = findViewById(R.id.etSearchSeat);
 
     }
 
     public void BookingSearch(View view) {
         city = etCity.getText().toString().trim();
-        seat = etSeat.getText().toString().trim();
+
         if(validateInputs()) {
             Intent i = new Intent(getApplicationContext(), AccommodationActivity.class);
             i.putExtra("SEARCH_CITY", city);
-            i.putExtra("SEARCH_SEAT", seat);
+            i.putExtra("SEARCH_GENDER", gender);
             startActivity(i);
         }
 
@@ -87,7 +92,7 @@ public class BookingActivity extends AppCompatActivity {
                 String response="";
                 HashMap<String, String> map=new HashMap<>();
                 try {
-                    HttpRequest req = new HttpRequest(accommodationURL);
+                    HttpRequest req = new HttpRequest(accommodationURL+"?gender="+gender);
                     response = req.prepare(HttpRequest.Method.POST).withData(map).sendAndReadString();
                 } catch (Exception e) {
                     response=e.getMessage();
@@ -228,11 +233,6 @@ public class BookingActivity extends AppCompatActivity {
         if (KEY_EMPTY.equals(city)) {
             etCity.setError("City cannot be empty");
             etCity.requestFocus();
-            return false;
-        }
-        if (KEY_EMPTY.equals(seat)) {
-            etSeat.setError("Seat cannot be empty");
-            etSeat.requestFocus();
             return false;
         }
         return true;

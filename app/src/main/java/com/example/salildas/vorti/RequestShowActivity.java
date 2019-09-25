@@ -29,6 +29,7 @@ public class RequestShowActivity extends AppCompatActivity {
     private static final String KEY_TOTAL_PRICE = "total_price";
     private static final String KEY_COUNT_DAY = "count_day";
     private static final String KEY_REQUEST_STATUS = "request_status";
+    private static final String KEY_RENTER_FULL_NAME = "renter_name";
     private static final String KEY_REQUEST_CREATED_AT = "request_created_at";
 
     private SessionHandler session;
@@ -38,7 +39,7 @@ public class RequestShowActivity extends AppCompatActivity {
     Constants constants = new Constants();
     public String cancel_request_url = constants.baseURL+"member/cancel_request.php";
 
-    TextView tvRenterPhone, tvStartDate, tvEndDate, tvTotalPrice, tvDayCount, tvRequestStatus, tvCreatedAt, tvAcceptStatus;
+    TextView tvRenterPhone, tvRenterName, tvStartDate, tvEndDate, tvTotalPrice, tvDayCount, tvRequestStatus, tvCreatedAt, tvAcceptStatus;
     Button cancelBtn;
 
     @Override
@@ -56,11 +57,13 @@ public class RequestShowActivity extends AppCompatActivity {
         String endDate = intent.getStringExtra(KEY_END_DATE);
         double totalPrice = intent.getDoubleExtra(KEY_TOTAL_PRICE,0);
         int dayCount = intent.getIntExtra(KEY_COUNT_DAY,0);
+        String renterName = intent.getStringExtra(KEY_RENTER_FULL_NAME);
         String requestStatus = intent.getStringExtra(KEY_REQUEST_STATUS);
         String createdAt = intent.getStringExtra(KEY_REQUEST_CREATED_AT);
 
 
         tvRenterPhone = (TextView) findViewById(R.id.renterPhone);
+        tvRenterName = (TextView) findViewById(R.id.renterName);
         tvStartDate = (TextView) findViewById(R.id.startDate);
         tvEndDate = (TextView) findViewById(R.id.endDate);
         tvTotalPrice = (TextView) findViewById(R.id.totalPrice);
@@ -71,7 +74,13 @@ public class RequestShowActivity extends AppCompatActivity {
 
         cancelBtn = (Button) findViewById(R.id.btnCancel);
 
-        tvRenterPhone.setText(""+renterPhone);
+
+        if(requestStatus.equals("pending")) {
+            tvRenterName.setText(""+renterName);
+        }else {
+            tvRenterName.setText(""+renterName);
+            tvRenterPhone.setText(""+renterPhone);
+        }
         tvStartDate.setText(""+startDate);
         tvEndDate.setText(""+endDate);
         tvTotalPrice.setText(""+(int) totalPrice);
@@ -89,7 +98,7 @@ public class RequestShowActivity extends AppCompatActivity {
                 }
             });
         }else {
-            tvAcceptStatus.setText("Your request has been approved by renter. Renter will contact you.");
+            tvAcceptStatus.setText("Your request has been accepted by renter. Renter will contact you.");
             cancelBtn.setVisibility(View.GONE);
         }
 
