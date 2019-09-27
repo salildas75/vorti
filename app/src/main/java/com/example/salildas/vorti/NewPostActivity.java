@@ -36,6 +36,8 @@ public class NewPostActivity extends AppCompatActivity{
     private static final String KEY_BATH = "bath";
     private static final String KEY_PRICE = "price";
     private static final String KEY_PHONE = "phone";
+    private static final String KEY_GENDER = "gender";
+    private static final String KEY_ACC_STATUS = "acc_status";
     private static final String KEY_IMAGE = "image";
     private static final String KEY_EMPTY = "";
     private EditText etStreetNo;
@@ -56,8 +58,10 @@ public class NewPostActivity extends AppCompatActivity{
     private String bathroom;
     private String price;
     private String userPhone;
+    private String forGender;
     private ProgressDialog pDialog;
     public String add_post_url = constants.baseURL+"member/add_post.php";
+    public String show_renter_post_url = constants.baseURL+"member/show_renter_post.php";
     private SessionHandler session;
     Uri imageUri;
 
@@ -66,6 +70,7 @@ public class NewPostActivity extends AppCompatActivity{
     Button pickImageButton;
 
     private Button btnPostSave;  // The save button
+    private Button btnViewPost;  // The view button
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,9 +88,11 @@ public class NewPostActivity extends AppCompatActivity{
         //phone no
         session = new SessionHandler(getApplicationContext());
         final User user = session.getUserDetails();
+        userPhone = user.getPhone();
 
 
         btnPostSave = findViewById(R.id.btnPostSave);
+        btnViewPost = findViewById(R.id.btnViewPost);
 
         // Set button's onClick listener object.
 
@@ -104,6 +111,7 @@ public class NewPostActivity extends AppCompatActivity{
                 bathroom = etBathroom.getText().toString().trim();
                 price = etPrice.getText().toString().trim();
                 userPhone = user.getPhone();
+                forGender = user.getGender();
                 pickImageButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -115,6 +123,13 @@ public class NewPostActivity extends AppCompatActivity{
                 if (validateInputs()) {
                     addPost();
                 }
+            }
+        });
+
+        btnViewPost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                viewPost();
             }
         });
 
@@ -148,6 +163,70 @@ public class NewPostActivity extends AppCompatActivity{
 
     }
 
+
+    private void viewPost(){
+
+        displayLoader();
+        JSONObject request = new JSONObject();
+        try {
+            //Populate the request parameters
+            request.put(KEY_PHONE, userPhone);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        JsonObjectRequest jsArrayRequest = new JsonObjectRequest
+                (Request.Method.POST, show_renter_post_url, request, new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        pDialog.dismiss();
+                        try {
+                            //Check if user got logged in successfully
+
+                            if (response.getInt(KEY_STATUS) == 0) {
+
+                                Intent intent = new Intent(NewPostActivity.this, ShowPostActivity.class);
+
+                                intent.putExtra(KEY_STREET_NO,response.getInt(KEY_STREET_NO));
+                                intent.putExtra(KEY_STREET_NAME,response.getString(KEY_STREET_NAME));
+                                intent.putExtra(KEY_CITY,response.getString(KEY_CITY));
+                                intent.putExtra(KEY_STATE,response.getString(KEY_STATE));
+                                intent.putExtra(KEY_SEAT,response.getInt(KEY_SEAT));
+                                intent.putExtra(KEY_BATH,response.getInt(KEY_BATH));
+                                intent.putExtra(KEY_PRICE,response.getDouble(KEY_PRICE));
+                                intent.putExtra(KEY_ACC_STATUS,response.getString(KEY_ACC_STATUS));
+
+                                startActivity(intent);
+
+                                Toast.makeText(getApplicationContext(),
+                                        response.getString(KEY_MESSAGE), Toast.LENGTH_SHORT).show();
+
+                            } else {
+                                Toast.makeText(getApplicationContext(),
+                                        response.getString(KEY_MESSAGE), Toast.LENGTH_SHORT).show();
+
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        pDialog.dismiss();
+
+                        //Display error message whenever an error occurs
+                        Toast.makeText(getApplicationContext(),
+                                error.getMessage(), Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+
+        // Access the RequestQueue through your singleton class.
+        MySingleton.getInstance(this).addToRequestQueue(jsArrayRequest);
+
+    }
+
     private void addPost() {
         displayLoader();
         JSONObject request = new JSONObject();
@@ -161,6 +240,7 @@ public class NewPostActivity extends AppCompatActivity{
             request.put(KEY_BATH, bathroom);
             request.put(KEY_PRICE, price);
             request.put(KEY_PHONE, userPhone);
+            request.put(KEY_GENDER, forGender);
             request.put(KEY_IMAGE, imageUri);
 
         } catch (JSONException e) {

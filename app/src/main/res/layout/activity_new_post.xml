@@ -141,5 +141,13 @@
         android:background="#f05924"
         android:text="Save"
         android:textColor="@android:color/white"/>
+    <Button
+        android:id="@+id/btnViewPost"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="#f05924"
+        android:text="View Post"
+        android:textColor="@android:color/white"/>
 
 </LinearLayout>

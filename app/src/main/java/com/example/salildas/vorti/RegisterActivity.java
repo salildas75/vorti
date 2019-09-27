@@ -7,6 +7,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.telephony.SmsManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -72,6 +74,8 @@ public class RegisterActivity extends AppCompatActivity {
     private static final int PICK_IMAGE = 100;
     private ImageView imageView;
     Button buttonChoose;
+
+    public String generateOTP;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -147,6 +151,10 @@ public class RegisterActivity extends AppCompatActivity {
 
                     if (register.getText().equals("Register")) {
 
+                        generateOTP = generateOTP();
+                        Log.d("newOTP",generateOTP);
+
+
                         register.setText("Verify");
                         first.setVisibility(View.GONE);
                         isAccount.setVisibility(View.GONE);
@@ -156,7 +164,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                     } else if (register.getText().equals("Verify")) {
                         String OTP = pinView.getText().toString();
-                        if (OTP.equals("3456")) {
+                        if (OTP.equals(generateOTP)) {
                             pinView.setLineColor(Color.GREEN);
                             textU.setText("OTP Verified");
                             textU.setTextColor(Color.GREEN);
@@ -178,7 +186,14 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
+    //Random number Generator
+    public static String generateOTP() {
+        int randomPin   =(int)(Math.random()*9000)+1000;
+        String otp  =String.valueOf(randomPin);
+        return otp;
+    }
 
+    //Image Picker
     private void openGallery() {
         Intent gallery =
                 new Intent(Intent.ACTION_PICK,
@@ -256,14 +271,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 Intent i = new Intent(RegisterActivity.this, RegisterActivity.class);
                                 startActivity(i);
 
-                            }else if (response.getInt(KEY_STATUS) == 2) {
-                                //Display error message if number is already existsing
-                                Toast.makeText(getApplicationContext(),
-                                        "Please insert a profile picture", Toast.LENGTH_LONG).show();
-                                Intent i = new Intent(RegisterActivity.this, RegisterActivity.class);
-                                startActivity(i);
-
-                            } else {
+                            }else {
                                 Toast.makeText(getApplicationContext(),
                                         response.getString(KEY_MESSAGE), Toast.LENGTH_SHORT).show();
 
